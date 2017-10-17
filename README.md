@@ -1,4 +1,4 @@
-# mysql-learning
+# MysQL learning notes
 This is the learning notes from book 'Sams Teach Yourself SQL in 10 Minutes', using MySQL as tool.
 1. [ex1](ex1) Create table and use SELECT.
 2. [ex2](ex2) SELECT by order and use WHERE
