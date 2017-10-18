@@ -1,0 +1,77 @@
+#分组数据
+
+SELECT vend_id,COUNT(*) AS num_prods FROM Products GROUP BY vend_id;
+--根据vend_id进行分组统计
+--GROUP BY 出现在WHERE子句之后，ORDER BY子句之前
+
+SELECT cust_id,COUNT(*) AS orders FROM Orders GROUP BY cust_id HAVING COUNT(*)>=2;
+--WHERE在数据分组之前进行过滤，HAVING在数据分组之后进行过滤
+
+SELECT order_num,COUNT(*) AS items FROM OrderItems GROUP BY order_num HAVING COUNT(*)>=3 ORDER BY items,order_num;
+
+--顺序：SELECT FROM WHERE GROUP BY HAVING ORDER BY
+
+#子查询 SubQuery
+
+SELECT cust_id FROM Orders WHERE order_num IN (Select order_num FROM OrderItems WHERE prod_id ='RGAN01');
+SELECT cust_name, cust_contact FROM Customers WHERE cust_id IN(SELECT cust_id FROM Orders WHERE order_num IN (SELECT order_num FROM OrderItems WHERE prod_id = 'RGAN01'));
+
+SELECT cust_name,
+       cust_state,
+       (SELECT COUNT(*) FROM Orders
+       WHERE Orders.cust_id = Customers.cust_id) AS orders
+FROM Customers ORDER BY cust_name;
+
+#联结表
+SELECT vend_name,prod_name,prod_price
+FROM Vendors,Products
+WHERE Vendors.vend_id = Products.vend_id
+ORDER BY 1,2;
+
+SELECT vend_name,prod_name,prod_price
+FROM Vendors INNER JOIN Products
+ ON Vendors.vend_id = Products.vend_id;
+--上述两种表达等效
+
+SELECT prod_name,vend_name,prod_price,quantity
+FROM Products,Vendors,OrderItems
+WHERE Products.vend_id = Vendors.vend_id
+ AND OrderItems.prod_id = Products.prod_id
+ AND order_num = 20007;
+
+#高级联结
+SELECT c1.cust_id,c1.cust_name,c1.cust_contact
+FROM Customers AS c1, Customers AS c2
+WHERE c1.cust_name = c2.cust_name
+ AND c2.cust_contact = 'Jim Jones';
+--自联结self-join
+
+SELECT Customers.cust_id, Orders.order_num
+FROM Customers LEFT JOIN Orders
+ ON Customers,cust_id = Orders.cust_id;
+--外联结outer-join，分为LEFT JOIN和RIGHT JOIN
+
+SELECT Customers.cust_id, COUNT(Orders.order_num) AS num_ord
+FROM Customers INNER JOIN Orders
+ On Customers.cust_id = Orders.cust_id
+Group BY Customers.cust_id;
+--INNER JOIN 与 COUNT() 函数的联结
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

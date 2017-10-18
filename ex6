@@ -1,0 +1,26 @@
+#视图
+CREATE VIEW ProductCustomers AS
+SELECT cust_name,cust_contact,prod_id
+FROM Customers,Orders,OrderItems
+WHERE Customers.cust_id = Orders.cust_id
+ AND Orders.order_num = OrderItems.order_num;
+
+SELECT * FROM ProductCustomers;
+SELECT cust_name,cust_contact From ProductCustomers WHERE prod_id = 'RGAN01';
+--创建视图并用于查询
+
+CREATE VIEW VendorLocations AS
+SELECT Concat(vend_name,'(','vend_contry',')') AS vend_title
+FROM Vendors;
+
+SELECT * FROM VendorLocations;
+--视图与Concat()函数的联结
+
+#事务处理
+START TRANSACTION
+DELETE OrderItems WHERE order_num = 12345
+DELETE Orders WHERE order_num = 12345
+COMMIT TRANSACTION
+
+
+

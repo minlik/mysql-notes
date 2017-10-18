@@ -1,0 +1,66 @@
+#插入数据
+INSERT INTO Customers
+VALUES('1000000006','Toy Land','123 Any Street','New York','NY','11111','USA',NULL,NULL);
+--严格按照在表中出现的顺序进行插入，不推荐
+
+INSERT INTO Customers(cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country,cust_contact,cust_email)
+VALUES('1000000006','Toy Land','123 Any Street','New York','NY','11111','USA',NULL,NULL);
+--按照制定顺序插入
+
+INSERT INTO CUSTOMERS(cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country,cust_contact,cust_email)
+SELECT cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country,cust_contact,cust_email
+FROM NewCustomers;
+--插入检索出的数据，与SELECT返回的列名位置无关，仅由顺序决定插入的值
+
+SELECT * INTO CustCopy FROM Customers;
+--表的整体复制
+
+CREATE TABLE CustCopy AS 
+SELECT * FROM Customers;
+
+#更新和删除数据
+Update Customers
+SET cust_email = 'abc@def.ghi',
+    cust_contact = 'Sam Roberts'
+WHERE cust_id = '100000001';
+--SET cust_email = NULL 删除值
+
+DELETE FROM Customers WHERE cust_id = '100000006';
+
+
+#创建和操纵表
+CREATE TABLE Products
+(
+	prod_id CHAR(10) NOT NULL,
+    prod_name CHAR(254) NOT NULL,
+    vend_id CHAR(10) NOT  NULL,
+    prod_price DECIMAL(8,2) NOT NULL,
+    prod_desc TEXT(1000) NULL
+);
+--NULL 为默认设置，允许插入或更新时不给出值
+--只允许NOT NULL的列作为主键
+
+CREATE TABLE Test(
+	order_date DATETIME NOT NULL DEFAULT CURRENT_DATE();
+);
+--制定默认值为当前日期
+
+ALTER TABLE Vendors
+ADD vend_phone CHAR(20);
+--更新表，添加列vend_phone
+
+ALTER TABLE Vendors,
+DROP vend_phone;
+--删除vend_phone列
+
+DROP TABLE CustCopy;
+--永久删除表CustCopy
+
+
+
+
+
+
+
+
+

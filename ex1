@@ -1,0 +1,65 @@
+#安装
+sudo apt-get install mysql mysql-server mysql-devel
+#启动
+mysql -u root -p
+#创建DATABASE
+CREATE DATABASE TESTDB
+#初始化create.txt & populate.txt
+新建5个表
+1.Venders表：存储销售产品的供应商
+vend_id;vend_name;vend_address;vend_city;vend_state;vend_zip;vend_zip;vend_country;
+2.Products表：存储产品目录
+prod_id;vend_id;prod_name;prod_price;prod_desc;
+3.Customers表：存储顾客信息
+cust_id;cust_name;cust_address;cust_city;cust_state;cust_zip;cust_country;cust_contact;cust_email;
+4.Orders表：存储顾客订单
+order_id;order_date;cust_id;
+5.OrderItems表：存储每个订单中的实际物品
+order_num;order_item;prod_id;quantity;item_price;
+#检索
+SELECT prod_name FROM Products 
++---------------------+
+| prod_name           |
++---------------------+
+| Fish bean bag toy   |
+| Bird bean bag toy   |
+| Rabbit bean bag toy |
+| 8 inch teddy bear   |
+| 12 inch teddy bear  |
+| 18 inch teddy bear  |
+| Raggedy Ann         |
+| King doll           |
+| Queen doll          |
++---------------------+
+#检索多个列
+SELECT prod_id,prod_name,prod_price FROM Products;
++---------+---------------------+------------+
+| prod_id | prod_name           | prod_price |
++---------+---------------------+------------+
+| BNBG01  | Fish bean bag toy   |       3.49 |
+| BNBG02  | Bird bean bag toy   |       3.49 |
+| BNBG03  | Rabbit bean bag toy |       3.49 |
+| BR01    | 8 inch teddy bear   |       5.99 |
+| BR02    | 12 inch teddy bear  |       8.99 |
+| BR03    | 18 inch teddy bear  |      11.99 |
+| RGAN01  | Raggedy Ann         |       4.99 |
+| RYL01   | King doll           |       9.49 |
+| RYL02   | Queen doll          |       9.49 |
++---------+---------------------+------------+
+#检索所有列
+SELECT * FROM Products;
+#检索不同的值
+SELECT DISTINCT vend_id FROM Products;
++---------+
+| vend_id |
++---------+
+| BRS01   |
+| DLL01   |
+| FNG01   |
++---------+
+#检索5行
+SELECT prod_name FROM Products LIMIT;
+SELECT prod_name FROM Products LIMIT OFFSET 5;
+
+
+

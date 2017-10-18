@@ -1,0 +1,36 @@
+#排序检索数据
+
+#排序检索数据 ORDER BY
+SELECT prod_name FROM Products ORDER BY prod_name;
+--ORDR BY子句应该是SELECT的最后一条子句
+
+#按照多个列排序
+SELECT prod_name,prod_id,prod_price FROM Products ORDER BY prod_price,prod_name; 
+SELECT prod_name,prod_id,prod_price FROM Products ORDER BY 3,1;
+
+#指定排序方向 ORDER BY * DESC
+SELECT prod_name,prod_id,prod_price FROM Products ORDER BY prod_price DESC;
+--按price降序排列
+SELECT prod_name,prod_id,prod_price FROM Products ORDER BY pro_price DESC,pro_nam;
+--price降序，price相同则name升序
+
+
+#过滤数据 WHERE
+SELECT prod_name,prod_price FROM Products WHERE prod_price = 3.49;
+SELECT prod_name,prod_price From Products WHERE prod_price < 10;
+SELECT vend_id,prod_name FROM Products WHERE vend_id <> 'DLL01';
+SELECT prod_name,prod_price FROM Products WHERE prod_price BETWEEN 5 AND 10;
+SELECT cust_name FROM Customers WHERE cust_email IS NULL;
+
+#WHERE 子句组合过滤
+SELECT prod_id,prod_name From Products WHERE prod_price < 10 AND vend_id ='DLL01';
+SELECT prod_id,prod_name From Products WHERE vend_id IN ('DLL01','BRS01');
+
+#通配符过滤 LIKE
+SELECT prod_id,prod_name FROM Products WHERE prod_name LIKE 'FISH%';
+--%匹配0个，1个或多个字符
+SELECT prod_id,prod_name FROM Products WHERE prod_name LIKE '__ inch teddy bear';
+--_匹配1个字符
+SELECT cust_contact FROM Customers WHERE cust_contact LIKE '[JM]%' ORDER BY cust_contact;
+--[ ] 匹配指定位置的1个字符
+
